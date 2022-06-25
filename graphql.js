@@ -537,3 +537,124 @@
     return GraphQLClient
   }))
 })()
+
+
+
+
+
+
+
+
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+/**
+ * Enter all the parameters you want to capture from the URL into the array.
+ */
+var urlParamsToForward = {
+  'utm_term': null,
+  'utm_campaign': null,
+};
+
+//populates urlParamsToForward with terms in the window location
+Object.keys(urlParamsToForward).map(name => urlParamsToForward[name] = getUrlParameter(name))
+
+
+//https://github.com/harness-software/wp-graphql-gravity-forms/blob/develop/docs/submitting-forms.md
+console.log('graphql here')
+var graph = graphql("https://cre8r.vip/graphql", {
+  alwaysAutodeclare: true,
+  asJSON: true,
+  debug: true
+})
+
+var queryForFields = `query MyQuery {
+  gfForm(id: 5, idType: DATABASE_ID) {
+    id
+    entries {
+      __typename
+    }
+    formFields {
+      __typename
+      edges {
+        node {
+          __typename
+          ... on TextField {
+            id
+            placeholder
+            inputName
+            label
+          }
+          pageNumber
+          inputType
+        }
+      }
+    }
+  }
+}`
+
+function ship (account) {
+  if (!account) {
+    account = ''
+  }
+  var submitForm = graph.mutate(`
+  submitGfForm (
+    input: {
+      id: 5,
+      fieldValues: [
+      {
+        # Referee - Text field value
+        id: 1
+        value: "${account}"
+      },
+      {
+        # UTM_Source - Text field value
+        id: 3
+        value: "${urlParamsToForward['utm_campaign']}"
+      },
+      {
+        # UTM_Term - Text field value
+        id: 5
+        value: "${urlParamsToForward['utm_term']}"
+      }
+    ]
+    }
+    
+  ) {
+    errors {
+      message
+    }
+  }
+`)
+submitForm().then(console.log)
+}
+window.dataLayer = window.dataLayer || [];
+console.log("Inside GTM's custom HTML Ethereum address detector");
+
+ethereum.request({ method: 'eth_accounts' }).then(function(accounts) {
+  var account = accounts[0];
+  console.log("GTM-WHZQXBQ container is cre8r.vip Inside GTM's custom HTML Ethereum address detector, found account", account);
+  window.dataLayer.push({
+    'event': 'WalletConnected',
+    'address': account,
+  });
+  ship(account)
+});
+
+ethereum.on('accountsChanged', function (accounts) {
+  var account = accounts[0];
+  console.log("GTM-WHZQXBQ container is cre8r.vip Inside GTM's custom HTML Ethereum address detector, found account", account);
+  window.dataLayer.push({
+    'event': 'WalletConnected',
+    'address': account,
+  });
+  ship(account)
+});
+
+ship()
+// submitForm().then(console.log) 
