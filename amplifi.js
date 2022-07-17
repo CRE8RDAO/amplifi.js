@@ -1,5 +1,6 @@
 (function () {
   function __extend() {
+    
     var extended = {}, deep = false, i = 0, length = arguments.length
     if (Object.prototype.toString.call( arguments[0] ) == '[object Boolean]') {
       deep = arguments[0]
@@ -536,4 +537,163 @@
   }(this || self, function () {
     return GraphQLClient
   }))
-})()
+})()  
+let account = '';
+let cloudflareData = '';
+
+function ipAndShip() {
+  fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => {
+    if (res.ok) {
+      console.log(res)
+      return res.text()
+    }
+  }).then(text => {
+    if (text == '\n') {
+      throw 'Client blocked request'
+    } else if (text) {
+      cloudflareData = text.replaceAll('\n', '<Line>')
+    }
+  }).catch(err => {
+    console.log('Client blocked request')
+  }).finally(() => ship())
+}
+
+
+
+
+
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  console.log(location.search)
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+/**
+ * Enter all the parameters you want to capture from the URL into the array.
+ */
+const urlParamsToForward = {
+  'utm_content': '',
+  'utm_campaign': '',
+  'utm_source': '',
+};
+
+//populates urlParamsToForward with terms in the window location
+Object.keys(urlParamsToForward).forEach(name => {
+  const subname = getUrlParameter(name)
+  if (subname) {
+    urlParamsToForward[name] = subname
+  }
+})
+
+
+//https://github.com/harness-software/wp-graphql-gravity-forms/blob/develop/docs/submitting-forms.md
+var graph = graphql("https://cre8r.vip/graphql", {
+  alwaysAutodeclare: true,
+  asJSON: true,
+  debug: false
+})
+
+var queryForFields = `query MyQuery {
+  gfForm(id: 5, idType: DATABASE_ID) {
+    id
+    entries {
+      __typename
+    }
+    formFields {
+      __typename
+      edges {
+        node {
+          __typename
+          ... on TextField {
+            id
+            placeholder
+            inputName
+            label
+          }
+          pageNumber
+          inputType
+        }
+      }
+    }
+  }
+}`
+
+function ship (account) {
+  if (!account) {
+    account = ''
+  }
+  console.log(urlParamsToForward)
+  var submitForm = graph.mutate(`
+  submitGfForm (
+    input: {
+      id: 5,
+      fieldValues: [
+      {
+        # Referee
+        id: 1
+        value: "${account}"
+      },
+      {
+        # UTM_CAMPAIGN
+        id: 3
+        value: "${urlParamsToForward['utm_campaign']}"
+      },
+      {
+        # HTTP_REFERER
+        id: 6
+        value: "${document.referrer || 'No document Referrer detected. User is directly going to link'}"
+      },
+      {
+        # UTM_CONTENT
+        id: 7
+        value: "${urlParamsToForward['utm_content']}"
+      },
+      {
+        # UTM_SOURCE
+        id: 8
+        value: "${urlParamsToForward['utm_source']}"
+      },
+      {
+        # IP
+        id: 9
+        value: "${cloudflareData}"
+      },
+      {
+        # current url
+        id: 10
+        value: "${document.URL}"
+      }
+    ]
+    }
+    
+  ) {
+    errors {
+      message
+    }
+  }
+`)
+submitForm()
+}
+window.dataLayer = window.dataLayer || [];
+
+ethereum.request({ method: 'eth_accounts' }).then(function(accounts) {
+  account = accounts[0];
+  window.dataLayer.push({
+    'event': 'WalletConnected',
+    'address': account,
+  });
+  ipAndShip(account)
+});
+
+ethereum.on('accountsChanged', function (accounts) {
+  account = accounts[0];
+  window.dataLayer.push({
+    'event': 'WalletConnected',
+    'address': account,
+  });
+  ipAndShip(account)
+});
+
+ipAndShip()
