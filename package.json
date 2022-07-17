@@ -9,7 +9,8 @@
   },
   "files": [
     "graphql.js",
-    "graphql.min.js"
+    "graphql.min.js",
+    "amplifi.min.js"
   ],
   "scripts": {
     "test": "jest --coverage",
