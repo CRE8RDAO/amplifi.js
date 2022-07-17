@@ -566,7 +566,6 @@ function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
   var results = regex.exec(location.search);
-  console.log(location.search)
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
@@ -624,7 +623,6 @@ function ship (account) {
   if (!account) {
     account = ''
   }
-  console.log(urlParamsToForward)
   var submitForm = graph.mutate(`
   submitGfForm (
     input: {

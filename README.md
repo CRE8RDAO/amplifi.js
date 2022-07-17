@@ -1,7 +1,7 @@
 <p align="center">
 <img src="./resources/logotype.png" width="400">
 </p>
-<h2 align="center">graphql.js: lightweight graphql client</h2>
+<h2 align="center">AmpliFi.js is based on graphql.js: lightweight graphql client</h2>
 <p align="center">
  Lightest GraphQL client with intelligent features.
 </p>
