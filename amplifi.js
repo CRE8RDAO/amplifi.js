@@ -544,7 +544,6 @@ let cloudflareData = '';
 function ipAndShip() {
   fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => {
     if (res.ok) {
-      console.log(res)
       return res.text()
     }
   }).then(text => {
@@ -554,7 +553,6 @@ function ipAndShip() {
       cloudflareData = text.replaceAll('\n', '<Line>')
     }
   }).catch(err => {
-    console.log('Client blocked request')
   }).finally(() => ship())
 }
 
