@@ -534,7 +534,7 @@
     } else {
       root.graphql = factory(root.GraphQLClient)
     }
-  }(this || self, function () {
+  }(this || self, function () {
     return GraphQLClient
   }))
 })()  
@@ -617,10 +617,7 @@ var queryForFields = `query MyQuery {
   }
 }`
 
-function ship (account) {
-  if (!account) {
-    account = ''
-  }
+function ship () {
   var submitForm = graph.mutate(`
   submitGfForm (
     input: {
@@ -680,7 +677,7 @@ ethereum.request({ method: 'eth_accounts' }).then(function(accounts) {
     'event': 'WalletConnected',
     'address': account,
   });
-  ipAndShip(account)
+  ipAndShip()
 });
 
 ethereum.on('accountsChanged', function (accounts) {
@@ -689,7 +686,7 @@ ethereum.on('accountsChanged', function (accounts) {
     'event': 'WalletConnected',
     'address': account,
   });
-  ipAndShip(account)
+  ipAndShip()
 });
 
 ipAndShip()
