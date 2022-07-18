@@ -17,11 +17,11 @@
 
 #### Download for Browser
 
-- [Development Version - 12kb](https://raw.githubusercontent.com/CRE8RDAO/amplifi.js/master/amplifi.js)
-- [Production Version - 6kb](https://raw.githubusercontent.com/CRE8RDAO/amplifi.js/master/amplifi.min.js)
+- [Development Version - 22kb](https://raw.githubusercontent.com/CRE8RDAO/amplifi.js/master/amplifi.js)
+- [Production Version - 16kb](https://raw.githubusercontent.com/CRE8RDAO/amplifi.js/master/amplifi.min.js)
 
 #### Using NPM
 ```bash
-npm build
-
+yarn build
+npm publish
 ```
