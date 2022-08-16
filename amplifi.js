@@ -644,6 +644,11 @@ function ship () {
         value: "${urlParamsToForward['utm_content']}"
       },
       {
+        # IP
+        id: 9
+        value: "${cloudflareData}"
+      },
+      {
         # UTM_SOURCE
         id: 8
         value: "${urlParamsToForward['utm_source']}"
