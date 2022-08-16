@@ -12,7 +12,7 @@
 #### CDN
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/amplifi.js@0/amplifi.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/amplifi.js@0.6.9/amplifi.min.js"></script>
 ```
 
 #### Download for Browser
