@@ -13,6 +13,8 @@
 
 ```html
 <script src="//cdn.jsdelivr.net/npm/amplifi.js@0.6.9/amplifi.min.js"></script>
+<script> src="//https://cdn.jsdelivr.net/npm/amplifi.js@0.7.4/amplifi.min.js"></script>
+```
 ```
 
 #### Download for Browser
