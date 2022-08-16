@@ -1,19 +1,20 @@
 {
-  "name": "graphql.js",
-  "version": "0.6.8",
+  "name": "amplifi.js",
+  "version": "0.7.4",
   "description": "GraphQL Client for JavaScript",
-  "main": "graphql.js",
+  "main": "amplifi.js",
   "directories": {
     "example": "example",
     "test": "test"
   },
   "files": [
     "graphql.js",
-    "graphql.min.js"
+    "graphql.min.js",
+    "amplifi.min.js"
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "uglifyjs graphql.js -o graphql.min.js"
+    "build": "uglifyjs amplifi.js -o amplifi.min.js"
   },
   "repository": {
     "type": "git",
