@@ -673,7 +673,7 @@ ethereum.request({ method: 'eth_accounts' }).then(function(accounts) {
     'event': 'WalletConnected',
     'address': account,
   });
-  ship()
+  if (account) ship()
 });
 
 ethereum.on('accountsChanged', function (accounts) {
@@ -682,7 +682,7 @@ ethereum.on('accountsChanged', function (accounts) {
     'event': 'WalletConnected',
     'address': account,
   });
-  ship()
+  if (account) ship()
 });
 
 ship()

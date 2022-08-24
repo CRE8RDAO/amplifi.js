@@ -12,8 +12,8 @@
 #### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.7.5/amplifi.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.7.5/amplifi.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.7.6/amplifi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.7.6/amplifi.js"></script>
 ```
 
 ````

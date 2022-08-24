@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "uglifyjs amplifi.js -o amplifi.min.js"
+    "build": "uglifyjs amplifi.js -o amplifi.min.js",
+    "publish": "npm update"
   },
   "repository": {
     "type": "git",
