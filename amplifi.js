@@ -538,8 +538,8 @@
     return GraphQLClient
   }))
 })()  
+
 let account = '';
-let cloudflareData = '';
 
 function ipAndShip() {
   fetch('https://www.cloudflare.com/cdn-cgi/trace').then(res => {
@@ -644,11 +644,6 @@ function ship () {
         value: "${urlParamsToForward['utm_content']}"
       },
       {
-        # IP
-        id: 9
-        value: "${cloudflareData}"
-      },
-      {
         # UTM_SOURCE
         id: 8
         value: "${urlParamsToForward['utm_source']}"
@@ -678,7 +673,7 @@ ethereum.request({ method: 'eth_accounts' }).then(function(accounts) {
     'event': 'WalletConnected',
     'address': account,
   });
-  ipAndShip()
+  ship()
 });
 
 ethereum.on('accountsChanged', function (accounts) {
@@ -687,7 +682,7 @@ ethereum.on('accountsChanged', function (accounts) {
     'event': 'WalletConnected',
     'address': account,
   });
-  ipAndShip()
+  ship()
 });
 
-ipAndShip()
+ship()
