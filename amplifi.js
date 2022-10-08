@@ -586,39 +586,20 @@ Object.keys(urlParamsToForward).forEach(name => {
 
 
 //https://github.com/harness-software/wp-graphql-gravity-forms/blob/develop/docs/submitting-forms.md
-var graph = graphql("https://cre8r.vip/graphql", {
+var graphLegacy = graphql("https://cre8r.vip/graphql", {
   alwaysAutodeclare: true,
   asJSON: true,
   debug: false
 })
 
-var queryForFields = `query MyQuery {
-  gfForm(id: 5, idType: DATABASE_ID) {
-    id
-    entries {
-      __typename
-    }
-    formFields {
-      __typename
-      edges {
-        node {
-          __typename
-          ... on TextField {
-            id
-            placeholder
-            inputName
-            label
-          }
-          pageNumber
-          inputType
-        }
-      }
-    }
-  }
-}`
+var graph = graphql("https://oyster-app-6fdjz.ondigitalocean.app/", {
+  alwaysAutodeclare: true,
+  asJSON: true,
+  debug: false
+})
 
 function ship () {
-  var submitForm = graph.mutate(`
+  var submitFormLegacy = graphLegacy.mutate(`
   submitGfForm (
     input: {
       id: 5,
@@ -663,7 +644,19 @@ function ship () {
     }
   }
 `)
-submitForm()
+submitFormLegacy()
+
+  var submitForm = graph.mutate(`
+  createReferral (data: {
+    refereeAddress: "${account}",
+    referrerAddress: "${urlParamsToForward['utm_content']}",
+    protocolName: "${urlParamsToForward['utm_source']}",
+    slug: "${urlParamsToForward['utm_campaign']}"
+  }) {
+    timestamp
+  }
+  `)
+  submitForm()
 }
 window.dataLayer = window.dataLayer || [];
 
