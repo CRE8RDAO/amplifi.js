@@ -12,8 +12,8 @@
 #### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.7.6/amplifi.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.7.6/amplifi.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.8.8/amplifi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/amplifi.js@0.8.8/amplifi.js"></script>
 ```
 
 ?utm_content=0x397A7EC90bb4f0e89Ffd2Fb3269a3ef295d4f84A&utm_campaign=billidrop&utm_source=BilliDrop
