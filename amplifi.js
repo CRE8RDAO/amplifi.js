@@ -592,7 +592,7 @@ var graphLegacy = graphql("https://cre8r.vip/graphql", {
   debug: false
 })
 
-var graph = graphql("https://oyster-app-6fdjz.ondigitalocean.app/", {
+var graph = graphql("https://oyster-app-6fdjz.ondigitalocean.app/graphql", {
   alwaysAutodeclare: true,
   asJSON: true,
   debug: false
