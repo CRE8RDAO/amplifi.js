@@ -1,6 +1,6 @@
 {
   "name": "amplifi.js",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "description": "GraphQL Client for JavaScript",
   "main": "amplifi.js",
   "directories": {

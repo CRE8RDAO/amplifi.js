@@ -651,7 +651,8 @@ submitFormLegacy()
     refereeAddress: "${account}",
     referrerAddress: "${urlParamsToForward['utm_content']}",
     protocolName: "${urlParamsToForward['utm_source']}",
-    slug: "${urlParamsToForward['utm_campaign']}"
+    slug: "${urlParamsToForward['utm_campaign']}",
+    location: "${document.URL || ""}"
   }) {
     timestamp
   }
